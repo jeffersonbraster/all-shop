@@ -22,6 +22,12 @@ const CategoryDropdown = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { getDropdownPosition } = useDropdownPosition(dropdownRef);
 
+  const toggleDropdown = () => {
+    if(category.subcategories && category.subcategories.length) {
+      setIsOpen(!isOpen);
+    }
+  }
+
   const onMouseEnter = () => {
     if (category.subcategories) {
       setIsOpen(true);
@@ -32,16 +38,32 @@ const CategoryDropdown = ({
 
   const dropdownPosition = getDropdownPosition();
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      if(category.subcategories && category.subcategories.length) {
+        setIsOpen(!isOpen);
+        e.preventDefault();
+      }
+    } else if (e.key === 'Escape' && isOpen) {
+      setIsOpen(false);
+      e.preventDefault();
+    }
+  }
+
   return (
     <div
       className="relative"
       ref={dropdownRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onKeyDown={handleKeyDown}
     >
       <div className="relative">
         <Button
           variant={"elevated"}
+          aria-expanded={isOpen}
+          aria-haspopup="true"
+          onClick={toggleDropdown}
           className={cn(
             "h-11 px-4 bg-transparent border-transparent rounded-full hover:bg-white hover:border-primary text-black",
             isActive && !isNavigationHovered && "bg-white border-primary"
