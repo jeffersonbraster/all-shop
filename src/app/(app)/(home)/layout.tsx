@@ -21,7 +21,8 @@ const HomeLayout = async ({ children }: { children: React.ReactNode }) => {
       parent: {
         exists: false,
       }
-    }
+    },
+    sort: "name",
   });
 
   const formattedData: CustomCategory[] = data.docs.map((doc) => ({
