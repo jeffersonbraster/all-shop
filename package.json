@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "payload:types": "payload generate:types",
-    "payload:fresh": "payload migrate:fresh"
+    "payload:fresh": "payload migrate:fresh",
+    "payload:seed": "bun run src/seed.ts"
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "^3.34.0",
