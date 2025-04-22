@@ -1,9 +1,9 @@
 
 
-export default function Home() {
-  
 
-  
+export default async function Home() {
 
-  return <div>oi</div>;
+  return <div>
+    oi
+  </div>;
 }
