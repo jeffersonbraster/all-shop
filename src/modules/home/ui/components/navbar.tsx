@@ -6,10 +6,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import NavbarSidebar from "./navbar-sidebar";
 import { MenuIcon } from "lucide-react";
 import { useTRPC } from "@/trpc/client";
 import { useQuery } from "@tanstack/react-query";
+import NavbarSidebar from "@/modules/home/ui/components/navbar-sidebar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -71,7 +71,7 @@ const Navbar = () => {
   return (
     <nav className="h-20 flex border-b justify-between font-medium bg-white">
       <Link href={"/"} className="pl-6 flex items-center">
-        <span className={cn("text-5xl font-semibold", poppins.className)}>
+        <span className={cn("text-4xl font-semibold", poppins.className)}>
           All-Shop
         </span>
       </Link>
@@ -133,7 +133,7 @@ const Navbar = () => {
           className="size-12 border-transparent bg-white"
           onClick={() => setIsSidebarOpen(true)}
         >
-          <MenuIcon />
+          <MenuIcon className="size-7" />
         </Button>
       </div>
     </nav>
