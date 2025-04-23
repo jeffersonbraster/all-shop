@@ -5,6 +5,8 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { useTRPC } from "@/trpc/client";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
 interface NavbarItemProps {
@@ -19,6 +21,10 @@ interface Props {
 }
 
 const NavbarSidebar = ({ items, open, onOpenChange }: Props) => {
+  const trpc = useTRPC();
+
+  const session = useQuery(trpc.auth.session.queryOptions());
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="left" className="p-0 transition-none">
@@ -40,22 +46,34 @@ const NavbarSidebar = ({ items, open, onOpenChange }: Props) => {
             </Link>
           ))}
 
-          <div className="border-t">
-            <Link
-              href={"/entrar"}
-              className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
-              onClick={() => onOpenChange(false)}
-            >
-              Entrar
-            </Link>
-            <Link
-              href={"/comecar-a-vender"}
-              className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
-              onClick={() => onOpenChange(false)}
-            >
-              Começar a vender
-            </Link>
-          </div>
+          {session.data?.user ? (
+            <div className="border-t">
+              <Link
+                href={"/dashboard"}
+                className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
+                onClick={() => onOpenChange(false)}
+              >
+                Dashboard
+              </Link>
+            </div>
+          ) : (
+            <div className="border-t">
+              <Link
+                href={"/entrar"}
+                className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
+                onClick={() => onOpenChange(false)}
+              >
+                Entrar
+              </Link>
+              <Link
+                href={"/comecar-a-vender"}
+                className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
+                onClick={() => onOpenChange(false)}
+              >
+                Começar a vender
+              </Link>
+            </div>
+          )}
         </ScrollArea>
       </SheetContent>
     </Sheet>
