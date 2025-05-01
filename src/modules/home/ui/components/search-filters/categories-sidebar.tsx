@@ -24,11 +24,11 @@ const CategoriesSidebar = ({ open, onOpenChange }: CategoriesSidebarProps) => {
   const { data } = useQuery(trpc.categories.getMany.queryOptions());
 
   const router = useRouter();
-  const [parentCategories, setParentCategories] = useState<
-    CategoriesGetManyOutput | null
+  const [parentCategories, setParentCategories] =
+    useState<CategoriesGetManyOutput | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<
+    CategoriesGetManyOutput[1] | null
   >(null);
-  const [selectedCategory, setSelectedCategory] =
-    useState<CategoriesGetManyOutput[1] | null>(null);
 
   const currentCategories = parentCategories ?? data ?? [];
 
@@ -40,7 +40,7 @@ const CategoriesSidebar = ({ open, onOpenChange }: CategoriesSidebarProps) => {
 
   const handleCategoryClick = (category: CategoriesGetManyOutput[1]) => {
     if (category.subcategories && category.subcategories.length > 0) {
-      setParentCategories(category.subcategories as unknown as CategoriesGetManyOutput);
+      setParentCategories(category.subcategories as CategoriesGetManyOutput);
       setSelectedCategory(category);
     } else {
       if (parentCategories && selectedCategory) {
