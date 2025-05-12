@@ -35,6 +35,23 @@ const ProductFilter = ({ title, className, children }: ProductFiltersProps) => {
 const ProductFilters = () => {
   const [filters, setFilters] = useProductFilters();
 
+  const hasAnyFilters = Object.entries(filters).some(
+    ([, value]) => {
+      if(typeof value === "string") {
+        return value !== "";
+      }
+
+      return value !== null
+    }
+  );
+
+  const onClear = () => {
+    setFilters({
+      minPrice: "",
+      maxPrice: "",
+    });
+  };
+
   const onChange = (key: keyof typeof filters, value: unknown) => {
     setFilters({ ...filters, [key]: value });
   };
@@ -44,9 +61,11 @@ const ProductFilters = () => {
       <div className="p-4 border-b flex items-center justify-between">
         <p className="font-medium">Filtros</p>
 
-        <button className="underline" onClick={() => {}}>
-          Limpar
-        </button>
+        {hasAnyFilters && (
+          <button className="underline cursor-pointer" onClick={onClear}>
+            Limpar
+          </button>
+        )}
       </div>
 
       <ProductFilter title="Preço" className="border-b-0">
