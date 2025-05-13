@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/lib/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useDropdownPosition } from "./use-dropdown-position";
 import SubCategoryMenu from "./subcategory-menu";
@@ -24,10 +24,10 @@ const CategoryDropdown = ({
   const { getDropdownPosition } = useDropdownPosition(dropdownRef);
 
   const toggleDropdown = () => {
-    if(category.subcategories && category.subcategories.length) {
+    if (category.subcategories && category.subcategories.length) {
       setIsOpen(!isOpen);
     }
-  }
+  };
 
   const onMouseEnter = () => {
     if (category.subcategories) {
@@ -40,16 +40,16 @@ const CategoryDropdown = ({
   const dropdownPosition = getDropdownPosition();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if(e.key === 'Enter' || e.key === ' ') {
-      if(category.subcategories && category.subcategories.length) {
+    if (e.key === "Enter" || e.key === " ") {
+      if (category.subcategories && category.subcategories.length) {
         setIsOpen(!isOpen);
         e.preventDefault();
       }
-    } else if (e.key === 'Escape' && isOpen) {
+    } else if (e.key === "Escape" && isOpen) {
       setIsOpen(false);
       e.preventDefault();
     }
-  }
+  };
 
   return (
     <div
@@ -68,11 +68,15 @@ const CategoryDropdown = ({
           onClick={toggleDropdown}
           className={cn(
             "h-11 px-4 bg-transparent border-transparent rounded-full hover:bg-white hover:border-primary text-black",
-            isActive && !isNavigationHovered && "bg-white border-primary", 
-            isOpen && "bg-white border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0.1)] -translate-x-[4px] -translate-y-[4px]"
+            isActive && !isNavigationHovered && "bg-white border-primary",
+            isOpen &&
+              "bg-white border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0.1)] -translate-x-[4px] -translate-y-[4px]"
           )}
         >
-          <Link prefetch href={`/${category.slug === 'all' ? '' : category.slug}`}>
+          <Link
+            prefetch
+            href={`/${category.slug === "all" ? "" : category.slug}`}
+          >
             {category.name}
           </Link>
         </Button>

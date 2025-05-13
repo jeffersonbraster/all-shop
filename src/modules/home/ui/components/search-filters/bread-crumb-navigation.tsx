@@ -5,7 +5,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/lib/components/ui/breadcrumb";
 import Link from "next/link";
 
 interface BreadCrumbNavigationProps {

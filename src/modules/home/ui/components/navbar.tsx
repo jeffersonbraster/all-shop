@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MenuIcon } from "lucide-react";
 import { useTRPC } from "@/trpc/client";
 import { useQuery } from "@tanstack/react-query";
 import NavbarSidebar from "@/modules/home/ui/components/navbar-sidebar";
+import { Button } from "@/lib/components/ui/button";
 
 const poppins = Poppins({
   subsets: ["latin"],

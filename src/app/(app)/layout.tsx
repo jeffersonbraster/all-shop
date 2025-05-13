@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/client";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/lib/components/ui/sonner";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
